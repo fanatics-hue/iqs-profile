@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQS — Worldwide Inspection Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#05111F;
+  --panel:#0C1929;
+  --panel2:#0F2035;
+  --border:rgba(0,194,232,0.12);
+  --cyan:#00C2E8;
+  --cyan-dim:rgba(0,194,232,0.15);
+  --gold:#D4A843;
+  --white:#FFFFFF;
+  --silver:#C8D6E5;
+  --muted:#5B7A94;
+  --green:#00E5A0;
+  --amber:#F0A500;
+  --red:#FF4B4B;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'IBM Plex Sans',sans-serif;
+  background:var(--navy);
+  color:var(--silver);
+  line-height:1.65;
+  font-size:15px;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,17,31,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 3rem;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  background:#fff;
+  padding:5px 11px;
+  border-radius:5px;
+  display:flex;align-items:center;
+  line-height:0;
+}
+.nav-logo img{height:28px;width:auto;display:block;}
+.nav-links{display:flex;gap:2.5rem;}
+.nav-links a{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;font-weight:500;
+  color:var(--muted);text-decoration:none;
+  letter-spacing:1.8px;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan);}
+.nav-links a{position:relative;}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0;right:0;bottom:-8px;
+  height:2px;
+  background:var(--nav-accent,var(--cyan));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.nav-links a.is-active{
+  color:var(--nav-accent,var(--cyan));
+}
+.nav-links a.is-active::after{
+  transform:scaleX(1);
+}
+.nav-cta{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;font-weight:600;
+  color:var(--cyan);
+  border:1px solid var(--cyan);
+  padding:7px 20px;border-radius:4px;
+  text-decoration:none;
+  letter-spacing:1px;text-transform:uppercase;
+  transition:all .2s;
+}
+.nav-cta:hover{background:var(--cyan);color:var(--navy);}
+
+/* ── HERO ── */
+.hero{
+  max-width:960px;margin:0 auto;
+  padding:86px 3rem 68px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--cyan);
+  border:1px solid rgba(0,194,232,0.3);
+  padding:6px 16px;border-radius:20px;
+  margin-bottom:30px;
+}
+.pulse{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(36px,5.2vw,56px);
+  font-weight:700;color:#fff;
+  line-height:1.07;letter-spacing:-1.5px;
+  margin-bottom:22px;
+}
+.hero h1 em{font-style:normal;color:var(--cyan);}
+.hero-sub{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:15px;font-weight:400;
+  color:#7A95B0;line-height:1.75;
+  max-width:580px;margin-bottom:42px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+.btn-primary{
+  background:var(--cyan);color:var(--navy);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
+  padding:14px 30px;border-radius:4px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-block;transition:all .2s;
+}
+.btn-primary:hover{background:#00D9FF;transform:translateY(-1px);}
+.btn-ghost{
+  background:transparent;color:var(--silver);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  padding:13px 30px;border-radius:4px;
+  border:1px solid rgba(200,214,229,.2);
+  cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;
+}
+.btn-ghost:hover{border-color:rgba(200,214,229,.45);}
+
+/* STATS */
+.stats-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(0,194,232,.08);
+  border:1px solid rgba(0,194,232,.15);
+  border-radius:8px;overflow:hidden;
+}
+.stat-cell{background:rgba(12,25,41,.88);padding:24px 18px;text-align:center;}
+.stat-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:28px;font-weight:700;color:#fff;
+  display:block;letter-spacing:-.8px;
+}
+.stat-num b{color:var(--cyan);font-weight:700;}
+.stat-label{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;font-weight:400;color:var(--muted);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-top:5px;display:block;
+}
+
+/* ── LAYOUT ── */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,rgba(0,194,232,.35),transparent);
+  margin:0 3rem;
+}
+.section{max-width:960px;margin:0 auto;padding:68px 3rem;}
+.section-tag{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(24px,3vw,32px);font-weight:700;
+  color:#fff;letter-spacing:-.8px;margin-bottom:10px;
+}
+.section-sub{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:14px;font-weight:400;color:var(--muted);
+  margin-bottom:40px;line-height:1.75;max-width:620px;
+}
+
+/* ── SERVICES ── */
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,.04);
+  border-radius:8px;overflow:hidden;
+}
+.svc{
+  background:var(--panel);padding:26px;
+  transition:background .2s;position:relative;overflow:hidden;
+}
+.svc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--cyan);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.svc:hover::before{transform:scaleX(1);}
+.svc:hover{background:var(--panel2);}
+.svc-icon{font-size:20px;margin-bottom:14px;}
+.svc-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;
+}
+.svc-desc{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;color:var(--muted);line-height:1.65;
+}
+
+/* ── PROCESS ── */
+.process{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;position:relative;
+}
+.process::before{
+  content:'';position:absolute;top:23px;left:10%;right:10%;
+  height:1px;background:rgba(0,194,232,.2);
+}
+.step{text-align:center;padding:0 10px;position:relative;z-index:1;}
+.step-num{
+  width:48px;height:48px;
+  background:var(--panel);border:1.5px solid rgba(0,194,232,.4);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+  font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+  color:var(--cyan);transition:all .2s;
+}
+.step:hover .step-num{background:var(--cyan-dim);border-color:var(--cyan);}
+.step-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;font-weight:600;color:var(--silver);margin-bottom:6px;
+}
+.step-desc{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;color:var(--muted);line-height:1.55;
+}
+
+/* ── DIGITAL TOOLS ── */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+.tool-card{
+  background:var(--panel);border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;padding:22px;transition:all .2s;
+}
+.tool-card:hover{border-color:rgba(0,194,232,.3);transform:translateY(-2px);}
+.tool-card.featured{border-color:rgba(0,194,232,.4);background:rgba(0,194,232,.04);}
+.tool-badge{
+  display:inline-block;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 9px;border-radius:3px;margin-bottom:12px;
+}
+.badge-c{background:rgba(0,194,232,.15);color:var(--cyan);}
+.badge-g{background:rgba(212,168,67,.15);color:var(--gold);}
+.tool-name{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;font-weight:600;color:#fff;margin-bottom:7px;
+}
+.tool-desc{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:14px;
+}
+.tool-link{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;font-weight:500;color:var(--cyan);
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  letter-spacing:.3px;transition:color .2s;
+}
+.tool-link:hover{color:#00D9FF;}
+.ab-row{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0;}
+.ab{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;
+}
+.ab-u{background:rgba(91,122,148,.2);color:#7A95B0;}
+.ab-a{background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);}
+.ab-xl{background:rgba(0,229,160,.1);color:var(--green);}
+.ab-pd{background:rgba(255,75,75,.1);color:var(--red);}
+.ab-js{background:rgba(240,165,0,.1);color:var(--amber);}
+
+/* DASHBOARD PREVIEW */
+.dash-preview{
+  background:#030D18;border:1px solid rgba(0,194,232,.3);
+  border-radius:10px;overflow:hidden;
+}
+.dash-chrome{
+  background:var(--panel);padding:9px 18px;
+  display:flex;align-items:center;gap:7px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.dot{width:9px;height:9px;border-radius:50%;}
+.dash-bar-title{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;color:var(--muted);margin-left:8px;
+}
+.dash-body{padding:18px;}
+.dash-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.dash-kpi{
+  background:var(--panel);border:1px solid rgba(255,255,255,.05);
+  border-radius:6px;padding:14px;text-align:center;
+}
+.dash-kpi-val{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:22px;font-weight:700;color:var(--cyan);
+  display:block;letter-spacing:-.5px;
+}
+.dash-kpi-lbl{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:9px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1px;margin-top:3px;display:block;
+}
+.phase-row{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);
+}
+.phase-row:last-child{border-bottom:none;}
+.ph-name{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;color:#7A95B0;width:130px;flex-shrink:0;
+}
+.ph-bar-wrap{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.ph-bar{height:100%;border-radius:2px;}
+.ph-pct{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:10px;font-weight:600;width:34px;text-align:right;flex-shrink:0;
+}
+.ph-status{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:8px;font-weight:600;letter-spacing:.8px;
+  padding:2px 7px;border-radius:2px;
+  flex-shrink:0;width:82px;text-align:center;
+}
+.st-c{background:rgba(0,229,160,.12);color:var(--green);}
+.st-p{background:rgba(240,165,0,.12);color:var(--amber);}
+.st-x{background:rgba(255,75,75,.12);color:var(--red);}
+
+/* ── REPORTING ── */
+.report-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.rep-col-title{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:16px;
+}
+.rep-item{
+  border-left:2px solid rgba(0,194,232,.25);
+  padding:12px 16px;margin-bottom:12px;
+  background:rgba(12,25,41,.5);
+  border-radius:0 6px 6px 0;transition:border-color .2s;
+}
+.rep-item:hover{border-left-color:var(--cyan);}
+.rep-item-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12px;font-weight:600;color:var(--silver);margin-bottom:4px;
+}
+.rep-item-desc{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;color:var(--muted);line-height:1.55;
+}
+
+/* ── REFERENCE ── */
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.ref-card{
+  background:var(--panel);border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;overflow:hidden;transition:border-color .2s;
+}
+.ref-card:hover{border-color:rgba(0,194,232,.25);}
+.ref-header{
+  padding:22px 22px 18px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.ref-order{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:7px;
+}
+.ref-project{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:18px;font-weight:700;color:#fff;
+  letter-spacing:-.4px;margin-bottom:4px;
+}
+.ref-client{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;color:var(--muted);line-height:1.5;
+}
+.ref-body{padding:18px 22px;}
+.ref-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.ref-kpi{background:rgba(0,0,0,.2);border-radius:6px;padding:10px;text-align:center;}
+.ref-kpi-val{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:18px;font-weight:700;color:var(--cyan);display:block;letter-spacing:-.3px;
+}
+.ref-kpi-lbl{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:8px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1px;margin-top:2px;display:block;
+}
+.ref-scope-title{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+}
+.ref-scope-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;color:var(--silver);
+  margin-bottom:6px;line-height:1.45;
+}
+.ref-dot{width:5px;height:5px;background:var(--cyan);border-radius:50%;flex-shrink:0;margin-top:4px;}
+.ref-phases{margin-top:14px;}
+.ref-phase{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03);
+}
+.ref-phase:last-child{border-bottom:none;}
+.ref-ph-name{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;color:var(--muted);width:110px;flex-shrink:0;
+}
+.ref-ph-bar-wrap{flex:1;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.ref-ph-bar{height:100%;border-radius:2px;}
+.ref-ph-pct{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:9px;font-weight:600;width:28px;text-align:right;flex-shrink:0;
+}
+.ref-links{display:flex;gap:0;margin-top:14px;flex-wrap:wrap;}
+.ref-link{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;font-weight:500;color:var(--cyan);
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  letter-spacing:.3px;transition:color .2s;padding-right:18px;
+}
+.ref-link:hover{color:#00D9FF;}
+
+/* ── WHY ── */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.why-card{
+  background:var(--panel);border:1px solid rgba(255,255,255,.05);
+  border-radius:8px;padding:20px 22px;
+  display:flex;gap:16px;transition:border-color .2s;
+}
+.why-card:hover{border-color:rgba(0,194,232,.2);}
+.why-ico{font-size:22px;flex-shrink:0;margin-top:2px;}
+.why-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;
+}
+.why-desc{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;color:var(--muted);line-height:1.65;
+}
+
+/* ── CTA ── */
+.cta-section{
+  background:rgba(0,194,232,.04);
+  border-top:1px solid rgba(0,194,232,.15);
+  border-bottom:1px solid rgba(0,194,232,.15);
+  padding:72px 3rem;text-align:center;
+}
+.cta-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:32px;font-weight:700;color:#fff;
+  margin-bottom:12px;letter-spacing:-1px;
+}
+.cta-sub{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:15px;color:var(--muted);margin-bottom:32px;
+}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{
+  max-width:960px;margin:0 auto;
+  padding:36px 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(255,255,255,.04);
+  flex-wrap:wrap;gap:16px;
+}
+.footer-logo{
+  background:#fff;padding:4px 9px;border-radius:4px;
+  display:inline-flex;align-items:center;line-height:0;
+}
+.footer-logo img{height:20px;width:auto;display:block;}
+.footer-meta{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:10px;color:#3A5068;letter-spacing:.8px;margin-top:6px;
+}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+.footer-links a{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;color:#3A5068;text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:var(--cyan);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="data:image/png;base64,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" alt="IQS Worldwide Inspection Company">
+  </a>
+  <div class="nav-links">
+    <a href="#reel">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#digital">Digital tools</a>
+    <a href="#reporting">Reporting</a>
+    <a href="#reference">Reference</a>
+    <a href="#why">Why IQS</a>
+  </div>
+  <a href="/cdn-cgi/l/email-protection#c8a1a6aea788a1b9bbe5bfbfe6aba7a5" class="nav-cta">Contact us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-tag"><span class="pulse"></span>Worldwide Inspection Company</div>
+  <h1>Quality Inspection<br>for the <em>Global</em><br>Energy Industry</h1>
+  <p class="hero-sub">Third-party inspection, NDT, expediting and full QA/QC services — with real-time digital reporting, live dashboards and dedicated on-site leadership from contract to final release.</p>
+  <div class="hero-actions">
+    <a href="/cdn-cgi/l/email-protection#b0d9ded6dff0d9c1c39dc7c79ed3dfdd" class="btn-primary">Talk to us &rarr;</a>
+    <a href="#digital" class="btn-ghost">Explore dashboards</a>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-cell"><span class="stat-num">30<b>+</b></span><span class="stat-label">Years of experience</span></div>
+    <div class="stat-cell"><span class="stat-num">1,000<b>s km</b></span><span class="stat-label">Linepipe inspected worldwide</span></div>
+    <div class="stat-cell"><span class="stat-num"><b>9</b></span><span class="stat-label">Specialist services</span></div>
+    <div class="stat-cell"><span class="stat-num"><b>Global</b></span><span class="stat-label">Oil, Gas &amp; Offshore operations</span></div>
+  </div>
+</section>
+
+<!-- REEL EMBED -->
+<section class="reel-section" id="reel">
+  <div class="reel-meta">
+    <span class="reel-tag">[ 00:20 · Brand Reel ]</span>
+    <span class="reel-title">IQS in motion &mdash; inspection, dashboards, sign-off.</span>
+  </div>
+  <div class="reel-frame">
+    <iframe src="iqs-reel.html" title="IQS Brand Reel" loading="lazy" allow="autoplay"></iframe>
+  </div>
+</section>
+
+<style>
+.reel-section{
+  max-width:1200px;margin:24px auto 0;
+  padding:0 3rem 24px;
+}
+.reel-meta{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.reel-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;color:var(--cyan);
+  letter-spacing:2px;text-transform:uppercase;
+}
+.reel-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;font-weight:500;color:var(--silver);
+  letter-spacing:.2px;
+}
+.reel-frame{
+  position:relative;
+  aspect-ratio:16/9;
+  width:100%;
+  background:#030B16;
+  border:1px solid rgba(0,194,232,.18);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(0,194,232,.04);
+}
+.reel-frame iframe{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:0;
+}
+.reporting-reel-frame{
+  position:relative;
+  aspect-ratio:16/9;
+  width:100%;
+  background:#030B16;
+  border:1px solid rgba(0,194,232,.18);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:40px;
+  box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(0,194,232,.04);
+}
+.reporting-reel-frame iframe{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:0;
+}
+@media (max-width:640px){
+  .reel-section{padding:0 1.5rem 16px;}
+}
+</style>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-tag">What we do</div>
+  <div class="section-title">Full-scope inspection services</div>
+  <p class="section-sub">From a single FAT to a multi-year EPC program &mdash; IQS deploys senior specialists that become an extension of your quality function.</p>
+  <div class="services-grid">
+    <div class="svc"><div class="svc-icon">&#128737;</div><div class="svc-title">Supplier Inspection (2nd &amp; 3rd Party)</div><div class="svc-desc">On-site at manufacturers&rsquo; premises. Full ITP witness &amp; review. Mechanical, electrical, instrumentation.</div></div>
+    <div class="svc"><div class="svc-icon">&#128225;</div><div class="svc-title">NDT &amp; Dimensional Control</div><div class="svc-desc">UT, RT, PT, MT. Inline production, in-yard, stockpiled. Valves, flanges, forgings, coatings.</div></div>
+    <div class="svc"><div class="svc-icon">&#128297;</div><div class="svc-title">Line Pipe Specialist</div><div class="svc-desc">Thousands of km of CS, Duplex and CRA Clad linepipe inspected &mdash; mill production through installation.</div></div>
+    <div class="svc"><div class="svc-icon">&#9201;</div><div class="svc-title">Expediting</div><div class="svc-desc">Proactive procurement monitoring. Identifies supply chain risks before they impact project schedule.</div></div>
+    <div class="svc"><div class="svc-icon">&#128674;</div><div class="svc-title">FPSO &amp; Offshore Platforms</div><div class="svc-desc">Construction &amp; commissioning surveillance of FPSOs, drillships, lay barges &mdash; fabrication to start-up.</div></div>
+    <div class="svc"><div class="svc-icon">&#127760;</div><div class="svc-title">Outsourcing &amp; Staff Augmentation</div><div class="svc-desc">Rapid deployment of qualified inspectors and engineers for project-specific or long-term needs worldwide.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section-tag">How we work</div>
+  <div class="section-title">From ITP to final release</div>
+  <p class="section-sub">A structured 5-step deployment model with named accountability at every stage &mdash; from first document review to IRN issuance.</p>
+  <div class="process">
+    <div class="step"><div class="step-num">01</div><div class="step-title">ITP Review</div><div class="step-desc">PO, standards, hold &amp; witness points defined upfront</div></div>
+    <div class="step"><div class="step-num">02</div><div class="step-title">Team Deployment</div><div class="step-desc">Plant Lead on-site, single client contact point</div></div>
+    <div class="step"><div class="step-num">03</div><div class="step-title">Surveillance</div><div class="step-desc">Welding, HT, NDT, dimensional, hydro, FI &mdash; continuous presence</div></div>
+    <div class="step"><div class="step-num">04</div><div class="step-title">NCR Management</div><div class="step-desc">Raised, tracked and closed in real time</div></div>
+    <div class="step"><div class="step-num">05</div><div class="step-title">MDR &amp; Release</div><div class="step-desc">IRN issuance, full documentation sign-off</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIGITAL TOOLS -->
+<section class="section" id="digital">
+  <div class="section-tag">Digital ecosystem</div>
+  <div class="section-title">Interactive dashboards &amp; live reports</div>
+  <p class="section-sub">Beyond traditional reporting &mdash; browser-based, mobile-ready tools that give the client real-time visibility into every order, every day. Each project receives its own dedicated dashboard, set up within 48h of kick-off.</p>
+  <div class="tools-grid">
+    <div class="tool-card featured">
+      <span class="tool-badge badge-c">QC Dashboard</span>
+      <div class="tool-name">Halios Gas Field</div>
+      <div class="tool-desc">Full production &amp; inspection tracking. Real-time KPIs, defect log, phase semaphores, Day/Night shift split.</div>
+      <div class="ab-row">
+        <span class="ab ab-u">User view</span>
+        <span class="ab ab-a">Admin</span>
+        <span class="ab ab-xl">Excel</span>
+        <span class="ab ab-pd">PDF</span>
+        <span class="ab ab-js">JSON</span>
+      </div>
+      <div class="ab-row" style="margin-top:10px;"><span class="ab ab-u">Password protected</span></div>
+      <a class="tool-link" href="https://fanatics-hue.github.io/sakarya-dashboard/" target="_blank">&#8599; Open dashboard</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge badge-c">Production Dashboard</span>
+      <div class="tool-name">APP Phase B</div>
+      <div class="tool-desc">CRA Clad Linepipe &mdash; production KPIs, order progress, inspection quantities and PO balance tracking.</div>
+      <div class="ab-row"><span class="ab ab-u">Password protected</span></div>
+      <a class="tool-link" href="https://fanatics-hue.github.io/nfps-dashboard/" target="_blank" style="margin-top:20px;">&#8599; Open dashboard</a>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge badge-g">Report Archive</span>
+      <div class="tool-name">APP-B Weekly Reports</div>
+      <div class="tool-desc">Online archive of all weekly Flash Reports for Order 77821. Full production history, NCR log, KPI trends &mdash; browsable &amp; downloadable.</div>
+      <a class="tool-link" href="https://fanatics-hue.github.io/eew-comp3b-reports/" target="_blank" style="margin-top:20px;">&#8599; Open report archive</a>
+    </div>
+  </div>
+  <div class="dash-preview">
+    <div class="dash-chrome">
+      <div class="dot" style="background:#FF4B4B;"></div>
+      <div class="dot" style="background:#F0A500;"></div>
+      <div class="dot" style="background:#00E5A0;"></div>
+      <span class="dash-bar-title">IQS QC Dashboard &mdash; Live &nbsp;&middot;&nbsp; APP-B | CRA Clad Linepipe | Bremen Special Pipe</span>
+    </div>
+    <div class="dash-body">
+      <div class="dash-kpi-row">
+        <div class="dash-kpi"><span class="dash-kpi-val">4,461</span><span class="dash-kpi-lbl">Total pipes</span></div>
+        <div class="dash-kpi"><span class="dash-kpi-val" style="color:var(--green);">94%</span><span class="dash-kpi-lbl">Released</span></div>
+        <div class="dash-kpi"><span class="dash-kpi-val" style="color:var(--amber);">12</span><span class="dash-kpi-lbl">NCR open</span></div>
+        <div class="dash-kpi"><span class="dash-kpi-val" style="color:var(--red);">2</span><span class="dash-kpi-lbl">On hold</span></div>
+      </div>
+      <div class="phase-row"><span class="ph-name">Welding (Clad)</span><div class="ph-bar-wrap"><div class="ph-bar" style="width:100%;background:var(--green);"></div></div><span class="ph-pct" style="color:var(--green);">100%</span><span class="ph-status st-c">COMPLETE</span></div>
+      <div class="phase-row"><span class="ph-name">Heat Treatment</span><div class="ph-bar-wrap"><div class="ph-bar" style="width:98%;background:var(--green);"></div></div><span class="ph-pct" style="color:var(--green);">98%</span><span class="ph-status st-c">COMPLETE</span></div>
+      <div class="phase-row"><span class="ph-name">UT Inspection</span><div class="ph-bar-wrap"><div class="ph-bar" style="width:96%;background:var(--amber);"></div></div><span class="ph-pct" style="color:var(--amber);">96%</span><span class="ph-status st-p">IN PROGRESS</span></div>
+      <div class="phase-row"><span class="ph-name">Hydro Test</span><div class="ph-bar-wrap"><div class="ph-bar" style="width:92%;background:var(--amber);"></div></div><span class="ph-pct" style="color:var(--amber);">92%</span><span class="ph-status st-p">IN PROGRESS</span></div>
+      <div class="phase-row"><span class="ph-name">Final Inspection</span><div class="ph-bar-wrap"><div class="ph-bar" style="width:25%;background:var(--red);"></div></div><span class="ph-pct" style="color:var(--red);">25%</span><span class="ph-status st-x">CRITICAL</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REPORTING -->
+<section class="section" id="reporting">
+  <div class="section-tag">Reporting ecosystem</div>
+  <div class="section-title">Structured transparency &mdash; daily &amp; weekly</div>
+  <p class="section-sub">Automated, consistent, management-ready. Generated from daily production data and delivered every Monday morning in Word and Excel format.</p>
+
+  <div class="reporting-reel-frame">
+    <iframe src="iqs-reel-reporting.html" title="IQS Reporting Reel" loading="lazy" allow="autoplay"></iframe>
+  </div>
+
+  <div class="reel-meta" style="margin-top:36px;">
+    <span class="reel-tag" style="color:var(--gold);">[ 00:13 &middot; Pre-shipment &amp; loading ]</span>
+    <span class="reel-title">Yard &rarr; quay &rarr; vessel &rarr; bill of lading &mdash; witnessed end-to-end.</span>
+  </div>
+  <div class="reporting-reel-frame" style="border-color:rgba(212,168,67,.25);">
+    <iframe src="iqs-reel-loading.html" title="IQS Pre-shipment & Loading Reel" loading="lazy" allow="autoplay"></iframe>
+  </div>
+
+  <div class="report-layout">
+    <div>
+      <div class="rep-col-title">Daily &mdash; live dashboard</div>
+      <div class="rep-item"><div class="rep-item-title">Production count</div><div class="rep-item-desc">Inspected / released / rejected per phase &mdash; updated continuously by inspectors in the field.</div></div>
+      <div class="rep-item"><div class="rep-item-title">NCR &amp; punch status</div><div class="rep-item-desc">Open non-conformances and punch items: raised, pending, closed. Real-time client visibility.</div></div>
+      <div class="rep-item"><div class="rep-item-title">Activity log (Day / Night)</div><div class="rep-item-desc">Witness &amp; hold points attended, observations raised, deviations logged per shift.</div></div>
+      <div class="rep-item"><div class="rep-item-title">Critical flags</div><div class="rep-item-desc">Production stops, repairs, quality deviations escalated same day &mdash; zero delay.</div></div>
+    </div>
+    <div>
+      <div class="rep-col-title">Weekly &mdash; Flash Report</div>
+      <div class="rep-item"><div class="rep-item-title">Executive summary</div><div class="rep-item-desc">KPI snapshot, % completion per phase, main events &mdash; designed for management-level review.</div></div>
+      <div class="rep-item"><div class="rep-item-title">Production KPI table</div><div class="rep-item-desc">PO qty, inspected, released, delta vs target. Green / Amber / Red semaphore per phase.</div></div>
+      <div class="rep-item"><div class="rep-item-title">Forecast &amp; critical path</div><div class="rep-item-desc">Projected completion dates per phase. Bottleneck identification and recommended actions.</div></div>
+      <div class="rep-item"><div class="rep-item-title">Next week plan</div><div class="rep-item-desc">Upcoming milestones, witness / hold points, inspectors on-site, planned outages.</div></div>
+    </div>
+    <div>
+      <div class="rep-col-title" style="color:var(--gold);">On demand &mdash; Technical Inspection</div>
+      <div class="rep-item" style="border-left-color:rgba(212,168,67,.35);"><div class="rep-item-title">Pipe Storage &amp; Handling audit</div><div class="rep-item-desc">Yard inspection of stacking, end caps, segregation by heat/grade, dunnage, drainage and marking integrity &mdash; with photo evidence and recommended actions.</div></div>
+      <div class="rep-item" style="border-left-color:rgba(212,168,67,.35);"><div class="rep-item-title">Pre-shipment &amp; loading survey</div><div class="rep-item-desc">Lashing, bracing, packing list reconciliation and damage check before despatch from mill or yard.</div></div>
+      <div class="rep-item" style="border-left-color:rgba(212,168,67,.35);"><div class="rep-item-title">Coating &amp; preservation check</div><div class="rep-item-desc">Visual / DFT verification, weather exposure assessment, condition reports for long-term stockpile.</div></div>
+      <div class="rep-item" style="border-left-color:rgba(212,168,67,.35);"><div class="rep-item-title">Issued as signed PDF</div><div class="rep-item-desc">Numbered TIR document, photo annex, inspector sign-off &mdash; usable as third-party record for client &amp; insurer.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REFERENCE PROJECTS -->
+<section class="section" id="reference">
+  <div class="section-tag">Reference projects</div>
+  <div class="section-title">Proven in the field</div>
+  <p class="section-sub">Large-scale, high-complexity programs where IQS delivered full inspection management &mdash; from production kick-off to final release.</p>
+  <div class="ref-grid">
+    <!-- APP PHASE B -->
+    <div class="ref-card">
+      <div class="ref-header">
+        <div class="ref-order">Order 77821 &nbsp;&middot;&nbsp; Active</div>
+        <div class="ref-project">APP Phase B</div>
+        <div class="ref-client">CRA Clad (MRB) MWPL Line Pipes &middot; Apex Marine / Hokuto Steel GmbH</div>
+        <div class="ref-client" style="margin-top:3px;">Manufacturer: Bremen Special Pipe GmbH, Hannover, Germany</div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-kpis">
+          <div class="ref-kpi"><span class="ref-kpi-val">4,461</span><span class="ref-kpi-lbl">Total pipes</span></div>
+          <div class="ref-kpi"><span class="ref-kpi-val">8</span><span class="ref-kpi-lbl">Phases</span></div>
+          <div class="ref-kpi"><span class="ref-kpi-val">24/7</span><span class="ref-kpi-lbl">Coverage</span></div>
+        </div>
+        <div class="ref-scope-title">IQS inspection scope</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Material incoming inspection &amp; heat traceability</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Welding surveillance &mdash; CS + Clad layers, WPS/PQR, welder qualification</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>PWHT witness &amp; chart review &middot; UT, RT, PT multi-technique NDT</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Hydrostatic testing, dimensional control &amp; coating inspection</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Final Inspection, NCR management, IRN issuance, MDR review</div>
+        <div class="ref-phases">
+          <div class="ref-phase"><span class="ref-ph-name">Milling / Bending</span><div class="ref-ph-bar-wrap"><div class="ref-ph-bar" style="width:100%;background:var(--green);"></div></div><span class="ref-ph-pct" style="color:var(--green);">100%</span></div>
+          <div class="ref-phase"><span class="ref-ph-name">Welding (CS+Clad)</span><div class="ref-ph-bar-wrap"><div class="ref-ph-bar" style="width:100%;background:var(--green);"></div></div><span class="ref-ph-pct" style="color:var(--green);">100%</span></div>
+          <div class="ref-phase"><span class="ref-ph-name">Heat Treatment</span><div class="ref-ph-bar-wrap"><div class="ref-ph-bar" style="width:98%;background:var(--green);"></div></div><span class="ref-ph-pct" style="color:var(--green);">98%</span></div>
+          <div class="ref-phase"><span class="ref-ph-name">UT Inspection</span><div class="ref-ph-bar-wrap"><div class="ref-ph-bar" style="width:96%;background:var(--amber);"></div></div><span class="ref-ph-pct" style="color:var(--amber);">96%</span></div>
+          <div class="ref-phase"><span class="ref-ph-name">Hydro Test</span><div class="ref-ph-bar-wrap"><div class="ref-ph-bar" style="width:92%;background:var(--amber);"></div></div><span class="ref-ph-pct" style="color:var(--amber);">92%</span></div>
+          <div class="ref-phase"><span class="ref-ph-name">Final Inspection</span><div class="ref-ph-bar-wrap"><div class="ref-ph-bar" style="width:25%;background:var(--red);"></div></div><span class="ref-ph-pct" style="color:var(--red);">25%</span></div>
+        </div>
+        <div class="ref-links">
+          <a class="ref-link" href="https://fanatics-hue.github.io/nfps-dashboard/" target="_blank">&#8599; Live production dashboard</a>
+          <a class="ref-link" href="https://fanatics-hue.github.io/eew-comp3b-reports/" target="_blank">&#8599; Weekly report archive</a>
+        </div>
+      </div>
+    </div>
+    <!-- HALIOS -->
+    <div class="ref-card">
+      <div class="ref-header">
+        <div class="ref-order">Halios Gas Field &nbsp;&middot;&nbsp; Completed</div>
+        <div class="ref-project">Halios Gas Field Project</div>
+        <div class="ref-client">Offshore Natural Gas Field &mdash; Eastern Mediterranean</div>
+        <div class="ref-client" style="margin-top:3px;">Client: Pelagos Energy / Vega Oil &nbsp;&middot;&nbsp; IQS Role: QC Inspection &amp; Surveillance</div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-kpis">
+          <div class="ref-kpi"><span class="ref-kpi-val" style="color:var(--green);">&#10003;</span><span class="ref-kpi-lbl">Delivered</span></div>
+          <div class="ref-kpi"><span class="ref-kpi-val">Live</span><span class="ref-kpi-lbl">Dashboard</span></div>
+          <div class="ref-kpi"><span class="ref-kpi-val">2</span><span class="ref-kpi-lbl">Access tiers</span></div>
+        </div>
+        <div class="ref-scope-title">IQS inspection scope</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Full QC inspection &amp; production surveillance</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Defect tracking with position &amp; severity classification</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Day / Night shift reporting with inspector accountability</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Live browser-based dashboard with real-time KPIs &amp; defect log</div>
+        <div class="ref-scope-item"><span class="ref-dot"></span>Full production history preserved &amp; accessible post-delivery</div>
+        <div class="ref-scope-title" style="margin-top:16px;">Dashboard access</div>
+        <div class="ref-scope-item"><span class="ref-dot" style="background:var(--muted);"></span><span><strong style="color:var(--silver);font-weight:600;">User</strong> &mdash; Full dashboard view, KPIs, phase tracking, defect log</span></div>
+        <div class="ref-scope-item"><span class="ref-dot" style="background:var(--gold);"></span><span><strong style="color:var(--gold);font-weight:600;">Admin</strong> &mdash; Full view + Print QC Report &amp; export &nbsp;<span class="ab ab-xl" style="font-size:8px;">Excel</span>&nbsp;<span class="ab ab-pd" style="font-size:8px;">PDF</span>&nbsp;<span class="ab ab-js" style="font-size:8px;">JSON</span></span></div>
+        <div class="ref-links" style="margin-top:16px;">
+          <a class="ref-link" href="https://fanatics-hue.github.io/sakarya-dashboard/" target="_blank">&#8599; Open live QC dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY IQS -->
+<section class="section" id="why">
+  <div class="section-tag">Why IQS</div>
+  <div class="section-title">What sets us apart</div>
+  <p class="section-sub">Not a generalist TPI firm. A specialist partner with named accountability, genuine technical depth and a fully integrated digital reporting infrastructure.</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-ico">&#128297;</div><div><div class="why-title">Deep CRA &amp; linepipe specialization</div><div class="why-desc">Genuine depth in CRA Clad, Duplex and CS linepipe &mdash; weld traceability, mechanical testing, heat correlation. Proven across 4,000+ pipe programs.</div></div></div>
+    <div class="why-card"><div class="why-ico">&#128100;</div><div><div class="why-title">Named on-site leadership</div><div class="why-desc">Every project has a named Plant Lead. No rotating inspectors. The client always knows who is accountable &mdash; day and night.</div></div></div>
+    <div class="why-card"><div class="why-ico">&#128202;</div><div><div class="why-title">Integrated digital reporting ecosystem</div><div class="why-desc">Live dashboards, automated Flash Reports and production tracking. Real-time visibility &mdash; not week-old PDFs.</div></div></div>
+    <div class="why-card"><div class="why-ico">&#127758;</div><div><div class="why-title">Scalable worldwide deployment</div><div class="why-desc">From a single FAT to a 3-year multi-phase program. Direct staff + vetted global freelance network &mdash; wherever and whenever needed.</div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-title">Let&rsquo;s work together</div>
+  <p class="cta-sub">From the first weld to the final release &mdash; IQS is with you.</p>
+  <div class="cta-actions">
+    <a href="/cdn-cgi/l/email-protection#563f383039163f27257b21217835393b" class="btn-primary">Request a proposal &rarr;</a>
+    <a href="https://iqs-ww.com" target="_blank" class="btn-ghost">iqs-ww.com</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">
+      <img src="data:image/png;base64,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" alt="IQS Worldwide Inspection Company">
+    </div>
+    <div class="footer-meta">Via Trieste 16/A &mdash; 20097 San Donato Milanese (MI), Italy &nbsp;&middot;&nbsp; +39 02 4953 2180 &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="432a2d252c032a32306e34346d202c2e">[email&#160;protected]</a></div>
+  </div>
+  <div class="footer-links">
+    <a href="https://iqs-ww.com" target="_blank">iqs-ww.com</a>
+    <a href="https://fanatics-hue.github.io/sakarya-dashboard/" target="_blank">Halios Dashboard</a>
+    <a href="https://fanatics-hue.github.io/nfps-dashboard/" target="_blank">APP Dashboard</a>
+    <a href="https://fanatics-hue.github.io/eew-comp3b-reports/" target="_blank">Weekly Reports</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Scroll-spy: highlight active nav link with a section-specific accent color
+(function(){
+  const accents = {
+    reel:      '#00C2E8',  // cyan
+    services:  '#00E5A0',  // mint
+    digital:   '#F0A500',  // amber
+    reporting: '#D4A843',  // gold
+    reference: '#FF6B6B',  // coral
+    why:       '#A78BFA',  // violet
+  };
+  const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const map = new Map();
+  links.forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const sec = document.getElementById(id);
+    if(sec) map.set(sec, {link:a, id});
+  });
+
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      const info = map.get(e.target);
+      if(!info) return;
+      if(e.isIntersecting){
+        // Clear all active
+        links.forEach(l=>l.classList.remove('is-active'));
+        // Set active
+        info.link.classList.add('is-active');
+        // Set nav accent CSS var
+        const c = accents[info.id] || '#00C2E8';
+        document.documentElement.style.setProperty('--nav-accent', c);
+      }
+    });
+  }, {
+    rootMargin: '-40% 0px -55% 0px',
+    threshold: 0,
+  });
+
+  map.forEach((_, sec)=>obs.observe(sec));
+})();
+</script>
+
+</body>
+</html>

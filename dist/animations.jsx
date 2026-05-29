@@ -328,6 +328,7 @@ function Stage({
   fps = 60,
   loop = true,
   autoplay = true,
+  speed = 1,
   persistKey = 'animstage',
   children,
 }) {
@@ -381,7 +382,7 @@ function Stage({
     }
     const step = (ts) => {
       if (lastTsRef.current == null) lastTsRef.current = ts;
-      const dt = (ts - lastTsRef.current) / 1000;
+      const dt = ((ts - lastTsRef.current) / 1000) * speed;
       lastTsRef.current = ts;
       setTime((t) => {
         let next = t + dt;
@@ -398,7 +399,7 @@ function Stage({
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       lastTsRef.current = null;
     };
-  }, [playing, duration, loop]);
+  }, [playing, duration, loop, speed]);
 
   // Keyboard: space = play/pause, ← → = seek
   React.useEffect(() => {

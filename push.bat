@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 title IQS - Push su GitHub
 color 0B
 

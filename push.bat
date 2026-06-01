@@ -1,4 +1,7 @@
 @echo off
+call "%~dp0..\_GUARD.bat" "IQS Push GitHub"
+if "%PROTEZIONE_OK%"=="0" ( pause & exit /b 0 )
+
 cd /d "%~dp0"
 title IQS - Push su GitHub
 color 0B

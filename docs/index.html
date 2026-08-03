@@ -22,6 +22,18 @@
   --green:#00E5A0;
   --amber:#F0A500;
   --red:#FF4B4B;
+
+  /* tweakable */
+  --mood-hue:0deg;
+  --mood-sat:1;
+  --dur-pulse:2s;
+  --dur-hover:.2s;
+  --dur-snap:.35s;
+  --space-scale:1;
+}
+#mood-wrap{
+  filter:hue-rotate(var(--mood-hue)) saturate(var(--mood-sat));
+  transition:filter .7s ease;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -335,6 +347,27 @@ nav{
 .st-p{background:rgba(240,165,0,.12);color:var(--amber);}
 .st-x{background:rgba(255,75,75,.12);color:var(--red);}
 
+/* ── FIELD APP GALLERY ── */
+.app-showcase{margin-top:56px;padding-top:44px;border-top:1px solid var(--border);}
+.app-showcase-head{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;margin-bottom:36px;}
+.app-showcase-copy .tool-badge{margin-bottom:14px;}
+.app-showcase-copy h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:28px;color:#fff;letter-spacing:-.4px;margin:0 0 14px;}
+.app-showcase-copy p{font-size:14.5px;line-height:1.7;color:var(--silver);margin:0 0 14px;}
+.app-feats{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.app-feat{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--silver);line-height:1.55;}
+.app-feat b{color:#fff;font-weight:600;}
+.app-feat-ico{width:22px;height:22px;border-radius:6px;background:rgba(0,194,232,.1);border:1px solid rgba(0,194,232,.3);color:var(--cyan);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.app-showcase-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;}
+.app-stat{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:18px;}
+.app-stat-val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--cyan);letter-spacing:-.5px;}
+.app-stat-lbl{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.3px;line-height:1.4;}
+.app-gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;}
+.app-shot-frame{position:relative;border-radius:22px;background:#000;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06);}
+.app-shot-frame img{display:block;width:100%;border-radius:16px;}
+.app-shot-cap{margin-top:10px;font-size:11px;color:var(--muted);text-align:center;letter-spacing:.3px;}
+.app-shot-cap b{color:var(--silver);display:block;font-size:12px;font-weight:600;margin-bottom:2px;}
+@media (max-width:1100px){.app-showcase-head{grid-template-columns:1fr;}.app-gallery{grid-template-columns:repeat(3,1fr);}}
+
 /* ── REPORTING ── */
 .report-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .rep-col-title{
@@ -492,6 +525,25 @@ footer{
 }
 .footer-links a:hover{color:var(--cyan);}
 
+/* ── TWEAK OVERRIDES: rhythm (spacing), tempo (motion), mood (color) ── */
+#mood-wrap .hero{padding-top:calc(86px * var(--space-scale)) !important;padding-bottom:calc(68px * var(--space-scale)) !important;}
+#mood-wrap .hero-actions{margin-bottom:calc(56px * var(--space-scale)) !important;}
+#mood-wrap .section{padding-top:calc(68px * var(--space-scale)) !important;padding-bottom:calc(68px * var(--space-scale)) !important;}
+#mood-wrap .cta-section{padding-top:calc(72px * var(--space-scale)) !important;padding-bottom:calc(72px * var(--space-scale)) !important;}
+#mood-wrap footer{padding-top:calc(36px * var(--space-scale)) !important;padding-bottom:calc(36px * var(--space-scale)) !important;}
+#mood-wrap .tools-grid{gap:calc(14px * var(--space-scale)) !important;margin-bottom:calc(28px * var(--space-scale)) !important;}
+#mood-wrap .ref-grid{gap:calc(20px * var(--space-scale)) !important;}
+#mood-wrap .why-grid{gap:calc(14px * var(--space-scale)) !important;}
+#mood-wrap .report-layout{gap:calc(24px * var(--space-scale)) !important;}
+#mood-wrap .app-showcase{margin-top:calc(56px * var(--space-scale)) !important;padding-top:calc(44px * var(--space-scale)) !important;}
+#mood-wrap .app-gallery{gap:calc(18px * var(--space-scale)) !important;}
+
+.pulse,.chat-launcher .cl-dot,.chat-h-status .dot{animation-duration:var(--dur-pulse) !important;}
+#mood-wrap .tool-card,#mood-wrap .ref-card,#mood-wrap .why-card,#mood-wrap .svc,
+#mood-wrap .btn-primary,#mood-wrap .btn-ghost,#mood-wrap .nav-cta,#mood-wrap .tool-link,
+#mood-wrap .chip,#mood-wrap .rep-item,.chat-launcher{transition-duration:var(--dur-hover) !important;}
+#mood-wrap .nav-links a::after{transition-duration:var(--dur-snap) !important;}
+
 /* ── LIVE CHAT ── */
 .chat-launcher{
   position:fixed;bottom:26px;right:26px;z-index:200;
@@ -642,6 +694,7 @@ footer{
 </head>
 <body>
 
+<div id="mood-wrap">
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">
@@ -832,6 +885,56 @@ footer{
       <div class="phase-row"><span class="ph-name">Final Inspection</span><div class="ph-bar-wrap"><div class="ph-bar" style="width:25%;background:var(--red);"></div></div><span class="ph-pct" style="color:var(--red);">25%</span><span class="ph-status st-x">CRITICAL</span></div>
     </div>
   </div>
+
+  <div class="app-showcase">
+    <div class="app-showcase-head">
+      <div class="app-showcase-copy">
+        <span class="tool-badge badge-c">Field app</span>
+        <h3>IQS Field Inspector &mdash; process control in every inspector's pocket</h3>
+        <p>A purpose-built mobile app that turns each pipe inspection into a structured, traceable data point the moment it happens &mdash; not a note transcribed later. Inspectors log Item N&deg;, Pipe N&deg;, CS/CRA Heat, Length, ITP Step and condition directly on-site; production data auto-fills whenever the asset is already in that day's dataset, cutting transcription errors to near zero.</p>
+        <p>Every record feeds the same live reporting ecosystem behind our dashboards: defects raise automatic alerts, "Needs review" and "Damaged" findings are tracked open/closed with mandatory root-cause and re-test confirmation, and nothing can be closed out on trust alone. The result is full heat-to-record traceability with an audit trail management and clients can actually see.</p>
+        <div class="app-feats">
+          <div class="app-feat"><span class="app-feat-ico">&#10003;</span><span><b>Closed-loop defect control.</b> Every "Needs review"/"Damaged" entry opens a tracked defect with mandatory cause, corrective action, and re-test confirmation before it can be closed.</span></div>
+          <div class="app-feat"><span class="app-feat-ico">&#8635;</span><span><b>Live cross-check against production.</b> Scans are matched against the day's production data in real time, auto-filling heats and flagging duplicate scans instantly.</span></div>
+          <div class="app-feat"><span class="app-feat-ico">&#128274;</span><span><b>Named accountability.</b> Every record is signed by the inspector who issued it, with a full timeline of who created, edited, and closed it &mdash; role-based access keeps admin controls separate from field entry.</span></div>
+          <div class="app-feat"><span class="app-feat-ico">&#128246;</span><span><b>Works without signal.</b> Offline-first: entries queue on-device in poor plant connectivity and sync automatically the moment a connection returns &mdash; no data ever lost in the field.</span></div>
+        </div>
+      </div>
+      <div class="app-showcase-stats">
+        <div class="app-stat"><div class="app-stat-val">100%</div><div class="app-stat-lbl">Heat-to-record traceability on every scan</div></div>
+        <div class="app-stat"><div class="app-stat-val">Live</div><div class="app-stat-lbl">Bottleneck &amp; forecast tracking per ITP phase</div></div>
+        <div class="app-stat"><div class="app-stat-val">Auto</div><div class="app-stat-lbl">Alerts on "Needs review" / "Damaged" findings</div></div>
+        <div class="app-stat"><div class="app-stat-val">0</div><div class="app-stat-lbl">Records lost &mdash; offline queue &amp; auto-sync</div></div>
+      </div>
+    </div>
+
+    <div class="app-gallery">
+      <div class="app-shot">
+        <div class="app-shot-frame"><img src="uploads/09-login.png" alt="IQS Field Inspector login screen"></div>
+        <div class="app-shot-cap"><b>Secure login</b>Per-inspector credentials, admin-managed</div>
+      </div>
+      <div class="app-shot">
+        <div class="app-shot-frame"><img src="uploads/08-dataset.png" alt="Dataset of registered assets"></div>
+        <div class="app-shot-cap"><b>Live dataset</b>Every asset logged, searchable, colour-coded</div>
+      </div>
+      <div class="app-shot">
+        <div class="app-shot-frame"><img src="uploads/06-new-asset.png" alt="Logging a new asset"></div>
+        <div class="app-shot-cap"><b>New asset entry</b>Auto-filled from production data on scan</div>
+      </div>
+      <div class="app-shot">
+        <div class="app-shot-frame"><img src="uploads/07-detail.png" alt="Asset detail with defect timeline"></div>
+        <div class="app-shot-cap"><b>Defect timeline</b>Issue, root cause, re-test, close &mdash; all logged</div>
+      </div>
+      <div class="app-shot">
+        <div class="app-shot-frame"><img src="uploads/01-order-status.png" alt="Order status and phase forecast"></div>
+        <div class="app-shot-cap"><b>Order status</b>Bottleneck detection &amp; forecast vs. contract date</div>
+      </div>
+      <div class="app-shot">
+        <div class="app-shot-frame"><img src="uploads/02-statistics.png" alt="Statistics dashboard"></div>
+        <div class="app-shot-cap"><b>Statistics</b>Defect trends, closure rate, disposition split</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -992,6 +1095,7 @@ footer{
     <a href="https://fanatics-hue.github.io/eew-comp3b-reports/" target="_blank">Weekly Reports</a>
   </div>
 </footer>
+</div><!-- /#mood-wrap -->
 
 <!-- LIVE CHAT -->
 <button class="chat-launcher" id="chatLauncher" aria-label="Open live chat">
@@ -1222,6 +1326,87 @@ footer{
     el.textContent = mail;
   });
 })();
+</script>
+
+<!-- TWEAKS -->
+<div id="tweaks-root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+function TweaksApp(){
+  const [t, setTweak] = useTweaks({ mood:'institutional', palette:['#05111F','#00C2E8','#D4A843'], tempo:'standard', rhythm:'standard' });
+
+  const MOOD_PALETTES = {
+    institutional: ['#05111F','#00C2E8','#D4A843'],
+    signal:        ['#05111F','#D4A843','#00C2E8'],
+    field:         ['#05150F','#00E5A0','#C8D6E5'],
+  };
+
+  React.useEffect(()=>{
+    const root = document.documentElement.style;
+    const presets = {
+      institutional: { hue:'0deg',    sat:'1'    },
+      signal:        { hue:'-145deg', sat:'1.1'  },
+      field:         { hue:'50deg',   sat:'1.05' },
+    };
+    const tempos = {
+      calm:     { pulse:'3.4s', hover:'.4s',  snap:'.55s' },
+      standard: { pulse:'2s',   hover:'.2s',  snap:'.35s' },
+      alert:    { pulse:'1s',   hover:'.12s', snap:'.18s' },
+    };
+    const rhythms = { compact:'0.68', standard:'1', airy:'1.4' };
+    const m = presets[t.mood] || presets.institutional;
+    const te = tempos[t.tempo] || tempos.standard;
+    root.setProperty('--mood-hue', m.hue);
+    root.setProperty('--mood-sat', m.sat);
+    root.setProperty('--dur-pulse', te.pulse);
+    root.setProperty('--dur-hover', te.hover);
+    root.setProperty('--dur-snap', te.snap);
+    root.setProperty('--space-scale', rhythms[t.rhythm] || '1');
+  }, [t.mood, t.tempo, t.rhythm]);
+
+  return (
+    <TweaksPanel>
+      <TweakSection label="Mood" />
+      <TweakRadio label="Accent mood" value={t.mood}
+                  options={[
+                    { value:'institutional', label:'Cyan' },
+                    { value:'signal',        label:'Gold' },
+                    { value:'field',         label:'Mint' },
+                  ]}
+                  onChange={(v)=>setTweak({ mood:v, palette:MOOD_PALETTES[v] })} />
+      <TweakColor label="Palette" value={t.palette}
+                  options={[
+                    MOOD_PALETTES.institutional,
+                    MOOD_PALETTES.signal,
+                    MOOD_PALETTES.field,
+                  ]}
+                  onChange={(v)=>{
+                    const found = Object.entries(MOOD_PALETTES).find(([,pal])=>JSON.stringify(pal)===JSON.stringify(v));
+                    setTweak({ palette:v, mood: found ? found[0] : t.mood });
+                  }} />
+      <TweakSection label="Motion" />
+      <TweakRadio label="Tempo" value={t.tempo}
+                  options={[
+                    { value:'calm',     label:'Calm' },
+                    { value:'standard', label:'Standard' },
+                    { value:'alert',    label:'Alert' },
+                  ]}
+                  onChange={(v)=>setTweak('tempo', v)} />
+      <TweakSection label="Rhythm" />
+      <TweakRadio label="Density" value={t.rhythm}
+                  options={[
+                    { value:'compact',  label:'Compact' },
+                    { value:'standard', label:'Standard' },
+                    { value:'airy',     label:'Airy' },
+                  ]}
+                  onChange={(v)=>setTweak('rhythm', v)} />
+    </TweaksPanel>
+  );
+}
+ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<TweaksApp />);
 </script>
 
 </body>
